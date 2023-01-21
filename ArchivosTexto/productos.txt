@@ -1,0 +1,17 @@
+Cocacola  500 ml;2500.0;1;
+Pepsi 500 ml;2400.0;1;
+Del Valle 500 ml;2100.0;1;
+Agua Briza 500 ml;1500.0;1;
+Sardinas en lata;1100.0;1;
+espaguetis Pastas la Muñeca;1000.0;1;
+Libra de Pezcado;3500.0;1;
+Libra de Carne de Res;2000.0;1;
+Libra Carne de Pollo;3600.0;1;
+Libra de Frijol;4000.0;1;
+Libra de Lentejas;5000.0;1;
+Libra de Arvejas;5500.0;1;
+Libra de Tomate;6000.0;1;
+Libra  de  Cebolla Larga;2000.0;1;
+Libra de Cebolla cabezona;4000.0;1;
+Libra de Papa Amarilla;3600.0;1;
+Libra de Papa Parda;3900.0;1;
