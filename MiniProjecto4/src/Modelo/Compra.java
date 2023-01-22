@@ -18,6 +18,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +33,7 @@ public class Compra {
     private String cedula, nombre, tipo, ghg;
     private String precio1;
     private int stock;
+    private int k;
     private CompraVisual compra;
     private Proveedor proveedor;
     private Productos producto;
@@ -39,6 +41,7 @@ public class Compra {
     private String productos[];
 
     private double precios[];
+    private int cantidades[];
 
     public Compra(String cedula, String nombre, String precio1, int stock, String tipo, CompraVisual compra, Proveedor proveedor) {
         this.cedula = cedula;
@@ -51,7 +54,7 @@ public class Compra {
         this.tipo = tipo;
 
     }
-    
+
     public Compra(String cedula, String nombre, String precio1, int stock, String tipo) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -66,24 +69,23 @@ public class Compra {
     }
 
     public Productos getProducto() {
-        
+
         return producto;
 
     }
-    
+
     public double[] getPrecios() {
-         producto = new Productos();
-            double precios[] = new double[producto.RecuperarPreciosProductos().size()];
+        producto = new Productos();
+        double precios[] = new double[producto.RecuperarPreciosProductos().size()];
         for (int i = 0; i < producto.RecuperarPreciosProductos().size(); i++) {
-             
-                 precios[i]=  Double.parseDouble(getProducto().RecuperarPreciosProductos().get(i).getPrecio());
-             
+
+            precios[i] = Double.parseDouble(getProducto().RecuperarPreciosProductos().get(i).getPrecio());
+
         }
-                
+
         return precios;
     }
-     
- 
+
     public String[] getProductos() {
         producto = new Productos();
         String productos[] = new String[producto.RecuperarNombreProductos().size()];
@@ -94,12 +96,29 @@ public class Compra {
         return productos;
     }
 
+    public int[] getCantidades() {
+        producto = new Productos();
+        cantidades = new int[producto.RecuperarCantidades().size()];
+        for (int i = 0; i < producto.RecuperarCantidades().size(); i++) {
+            getProducto().RecuperarCantidades().get(i);
+
+        }
+
+        return cantidades;
+    }
+
     public void AgregarVentas() {
-         precios= getPrecios();
+        precios = getPrecios();
+
         String codigo = compra.getCodigo1().getText();
         String nombre = compra.getNombre1().getText();
+
         double precio = precios[compra.getCombo1().getSelectedIndex()];
+
+        compra.getStock1().getComponentZOrder(compra);
+
         int stock1 = Integer.parseInt(compra.getStock1().getValue().toString());
+
         compra.getPrecio1().setText(Moneda(precio * stock1));
         String precioi = compra.getPrecio1().getText();
         String tipo = compra.getCombo1().getSelectedItem().toString();
@@ -181,18 +200,27 @@ public class Compra {
                 String nombre1 = "";
                 String precio1 = "";
                 int stock = 0;
+
                 String tipo = "";
                 Compra e = new Compra(cedula, nombre1, precio1, stock, tipo, compra, proveedor);
-                e.setCodigo(delimitar.next());
-                e.setNombre(delimitar.next());
-                e.setPrecio(delimitar.next());
-                e.setStock(delimitar.nextInt());
-                e.setTipo(delimitar.next());
-
-                enta.add(e);
+  
+               do {
+                    try {
+                        e.setCodigo(delimitar.next());
+                        e.setNombre(delimitar.next());
+                        e.setPrecio(delimitar.next());
+                        
+                       // e.setStock(delimitar.nextInt());
+                       e.setTipo(delimitar.next());
+                        enta.add(e);
+                   } catch (InputMismatchException ime) {
+                        System.out.println("¡Cuidado! Solo puedes insertar números. ");
+                       delimitar.next();
+                    }
+               } while (stock != 0);
 
             }
-
+              
             scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -204,8 +232,6 @@ public class Compra {
     public String Moneda(double precio) {
         return "$" + Math.round(precio * 100) / 100 + " COL";
     }
-
-   
 
     public void Comparar() {
 
@@ -221,6 +247,40 @@ public class Compra {
         }
 
     }
+    
+       public ArrayList<Compra>RecuperarNombreProductos(){
+           ArrayList<Compra> producto = new ArrayList<Compra>();
+          
+          producto= RecuperarVentas();
+          for (int i = 0; i < producto.size(); i++) {
+              producto.get(i).getTipo();
+        
+          }
+          
+          
+          return  producto;
+      }
+      
+      public ArrayList<Compra>RecuperarPreciosProductos(){
+           ArrayList<Compra> precios = new ArrayList<Compra>();
+          
+          precios=  RecuperarVentas();
+          for (int i = 0; i < precios.size(); i++) {
+             precios.get(i).getPrecios();
+      
+          }
+          
+          
+          return  precios;
+      }
+      public ArrayList<Compra>RecuperarCantidades(){
+            ArrayList<Compra> cantidades = new ArrayList<Compra>();
+           cantidades=  RecuperarVentas();
+            for (int i = 0; i < cantidades.size(); i++) {
+              cantidades.get(i).getStock();
+          }
+      return cantidades;
+      }
 
     /////////////////////
     public void ActualizarVentas() {

@@ -18,6 +18,8 @@ import Vista.VentaVisual;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedWriter;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
@@ -36,7 +39,7 @@ import javax.swing.event.ChangeListener;
  *
  * @author ervin
  */
-public class Controlador implements ActionListener, CaretListener, ChangeListener, KeyListener {
+public class Controlador implements ActionListener, CaretListener, ChangeListener, KeyListener, ItemListener {
 
     private ClienteVisual cliente;
     private CompraVisual compra;
@@ -85,6 +88,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
         this.compra.getPrecio1().addKeyListener(this);
         this.compra.getStock1().addChangeListener(this);
         this.compra.getCombo1().addActionListener(this);
+        this.compra.getCombo1().addItemListener(this);
         this.compra.getProveedor().addActionListener(this);
 
         ////Frame  Proveedor
@@ -109,7 +113,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
         this.venta.getCombo1().addActionListener(this);
         this.venta.getCodigo1().addKeyListener(this);
         this.venta.getNombre1().addKeyListener(this);
-         this.venta.getCliente().addActionListener(this);
+        this.venta.getCliente().addActionListener(this);
         // this.venta.getPrecio1().addKeyListener(this);
 
         /////Frame Productos
@@ -210,13 +214,12 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             compra.setVisible(false);
             proveedor.setVisible(false);
             venta.setVisible(false);
-        }else if (e.getSource().equals(venta.getCliente())) {
-              cliente.setVisible(true);
-        }else if (e.getSource().equals(compra.getProveedor())) {
-             proveedor.setVisible(true);
-            
+        } else if (e.getSource().equals(venta.getCliente())) {
+            cliente.setVisible(true);
+        } else if (e.getSource().equals(compra.getProveedor())) {
+            proveedor.setVisible(true);
+
         }
-        
 
         if (e.getSource().equals(cliente.getAgregar2())) {
             //ente.AgregarClientes();
@@ -315,20 +318,16 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
 
         }
         if (e.getSource().equals(proveedor.getEliminar2())) {
-            //edor.EliminarProveedores();
-
-            String dAfiliado = edor.getCodigo();
-            boolean bandera = false;
+           boolean bandera = false;
             String cedulaAfiliado = JOptionPane.showInputDialog("Ingrese la cedula del Cliente que se qiere  eliminar");
 
             for (int j = 0; j < edor.RecuperarProveedores().size(); j++) {
                 for (int i = 0; i < pra.RecuperarVentas().size(); i++) {
-                    if ((edor.RecuperarProveedores().get(i).getCodigo()).equals(cedulaAfiliado)) {
+                    if ((edor.RecuperarProveedores().get(j).getCodigo()).equals(cedulaAfiliado)) {
                         if (pra.RecuperarVentas().get(i).getCodigo().equals(edor.RecuperarProveedores().get(j).getCodigo())) {
-                            bandera = true;
-                            System.out.println("NO se puede Eliminnar");
 
-                            break;
+                            bandera = true;
+                            System.out.println(" N0 puede Eliminnarl");
                         }
 
                     }
@@ -336,14 +335,10 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
                 }
             }
             if (bandera == false) {
-                edor.EliminarProveedores();
-                System.out.println("SE  puede Eliminnar");
+               edor.EliminarProveedores();
+                System.out.println("Se puede Eliminnarl");
+
             }
-
-        }
-        if (e.getSource().equals(venta.getCombo1().getSelectedItem())) {
-            enta.AgregarVentas();
-
         }
 
         if (e.getSource().equals(venta.getAgregar2())) {
@@ -418,7 +413,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             compra.getNombre1().setText("");
             compra.getPrecio1().setText("");
             compra.getTipo1().setText("");
-            compra.getStock1().setToolTipText("");
+            //compra.getStock2().setMinimum(0);
         }
         if (e.getSource().equals(compra.getListar2())) {
 
@@ -431,6 +426,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null, "Se Limpio la tabla.");
             }
+            
             for (Compra enta : pra.RecuperarVentas()) {
                 compra.getModelo().addRow(
                         new Object[]{
@@ -440,6 +436,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
                             enta.getStock(),
                             enta.getTipo(),});
             }
+
         }
 
         if (e.getSource().equals(compra.getActulizar2())) {
@@ -449,28 +446,9 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
 
         if (e.getSource().equals(compra.getEliminar2())) {
 
-            String dAfiliado = edor.getCodigo();
-            boolean bandera = false;
-            String cedulaAfiliado = JOptionPane.showInputDialog("Ingrese la cedula del Cliente que se qiere  eliminar");
-
-            for (int j = 0; j < edor.RecuperarProveedores().size(); j++) {
-                for (int i = 0; i < pra.RecuperarVentas().size(); i++) {
-                    if ((edor.RecuperarProveedores().get(i).getCodigo()).equals(cedulaAfiliado)) {
-                        if (pra.RecuperarVentas().get(i).getCodigo().equals(edor.RecuperarProveedores().get(j).getCodigo())) {
-
-                            pra.EliminaVentas();
-                            bandera = true;
-                            System.out.println(" se puede Eliminnarl");
-                        }
-
-                    }
-
-                }
-            }
-            if (bandera == false) {
-
-                System.out.println(" No Se puede Eliminnarl");
-            }
+            
+                pra.EliminaVentas();
+            
 
         }
 
@@ -519,7 +497,6 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
         if (e.getSource().equals(cliente.getBuscar1())) {
             ente.Buscar();
         }
-       
 
     }
 
@@ -613,8 +590,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             if (!Character.isDigit(carater)) {
                 e.consume();
             }
-        } 
-        else if (e.getSource().equals(venta.getCodigo1())) {
+        } else if (e.getSource().equals(venta.getCodigo1())) {
             if (venta.getCodigo1().getText().length() >= 10) {
                 e.consume();
                 Toolkit.getDefaultToolkit().beep();
@@ -632,8 +608,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             if (!Character.isAlphabetic(carater)) {
                 e.consume();
             }
-        } 
-        else if (e.getSource().equals(compra.getCodigo1())) {
+        } else if (e.getSource().equals(compra.getCodigo1())) {
             if (compra.getCodigo1().getText().length() >= 10) {
                 e.consume();
                 Toolkit.getDefaultToolkit().beep();
@@ -660,8 +635,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             if (!Character.isAlphabetic(carater)) {
                 e.consume();
             }
-         }
-        else if (e.getSource().equals(producto.getPrecioouno())) {
+        } else if (e.getSource().equals(producto.getPrecioouno())) {
             if (producto.getPrecioouno().getText().length() >= 10) {
                 e.consume();
                 Toolkit.getDefaultToolkit().beep();
@@ -670,8 +644,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             if (!Character.isDigit(carater)) {
                 e.consume();
             }
-        } 
-           else if (e.getSource().equals(producto.getCantidaduno())) {
+        } else if (e.getSource().equals(producto.getCantidaduno())) {
             if (producto.getCantidaduno().getText().length() >= 10) {
                 e.consume();
                 Toolkit.getDefaultToolkit().beep();
@@ -680,7 +653,7 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
             if (!Character.isDigit(carater)) {
                 e.consume();
             }
-        } 
+        }
     }
 
     @Override
@@ -691,6 +664,120 @@ public class Controlador implements ActionListener, CaretListener, ChangeListene
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getSource().equals(compra.getCombo1())) {
+            int selection = compra.getCombo1().getSelectedIndex();
+            switch (selection) {
+                case 0 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum(ducto.RecuperarCantidades().get(0).getCantidad());
+                    }
+                }
+                case 1 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(1).getCantidad()));
+                    }
+                }
+                case 2 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(2).getCantidad()));
+                    }
+                }
+                case 3 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(3).getCantidad()));
+                    }
+                }
+                case 4 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(4).getCantidad()));
+                    }
+                }
+                case 5 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(5).getCantidad()));
+                    }
+                }
+                case 6 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(6).getCantidad()));
+                    }
+                }
+                case 7 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(7).getCantidad()));
+                    }
+                }
+                case 8 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(8).getCantidad()));
+                    }
+                }
+                case 9 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(9).getCantidad()));
+                    }
+                }
+                case 10 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(10).getCantidad()));
+                    }
+                }
+                case 11 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(11).getCantidad()));
+                    }
+                }
+                case 12 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(12).getCantidad()));
+                    }
+                }
+                case 13 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(13).getCantidad()));
+                    }
+                }
+                case 14 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(14).getCantidad()));
+                    }
+                }
+                case 15 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum((ducto.RecuperarCantidades().get(15).getCantidad()));
+                    }
+                }
+                case 16 -> {
+                    for (Productos RecuperarPreciosProducto : ducto.RecuperarCantidades()) {
+                        compra.getStock2().setMaximum(1);
+                        compra.getStock2().setMaximum(ducto.RecuperarCantidades().get(16).getCantidad());
+                    }
+                }
+                default -> {
+                }
+
+            }
+        }
     }
 
 }

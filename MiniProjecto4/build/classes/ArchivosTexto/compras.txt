@@ -1,0 +1,17 @@
+1111111111;Alkosto;$20000 COL;10;Cocacola  500 ml;
+1111111111;Alkosto;$26000 COL;13;Pepsi 500 ml;
+1111111111;Alkosto;$48000 COL;16;Del Valle 500 ml;
+1111111111;Alkosto;$81000 COL;18;Agua Briza 500 ml;
+1111111111;Alkosto;$62700 COL;19;Sardinas en lata;
+1111111111;Alkosto;$57000 COL;19;espaguetis Pastas la Muñeca;
+1111111111;Alkosto;$178500 COL;17;Libra de Pezcado;
+1111111111;Alkosto;$63000 COL;21;Libra de Carne de Res;
+1111111111;Alkosto;$393120 COL;21;Libra Carne de Pollo;
+1111111111;Alkosto;$852800 COL;41;Libra de Frijol;
+1111111111;Alkosto;$255000 COL;51;Libra de Lentejas;
+1111111111;Alkosto;$335500 COL;61;Libra de Arvejas;
+1111111111;Alkosto;$426000 COL;71;Libra de Tomate;
+1111111111;Alkosto;$62000 COL;31;Libra  de  Cebolla Larga;
+1111111111;Alkosto;$84000 COL;21;Libra de Cebolla cabezona;
+1111111111;Alkosto;$111600 COL;31;Libra de Papa Amarilla;
+1111111111;Alkosto;$81900 COL;21;Libra de Papa Parda;

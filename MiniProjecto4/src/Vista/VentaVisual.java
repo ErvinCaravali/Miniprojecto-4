@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.Compra;
 import Modelo.Productos;
 import Modelo.Venta;
 import java.awt.BorderLayout;
@@ -38,6 +39,7 @@ public class VentaVisual extends JFrame {
     private JTextField codigo1, nombre1, precio1, tipo1;
     private Venta venta;
     private Productos to;
+   private Compra pra;
     private JComboBox<String> combo1;
 
     private DefaultTableModel Modelo;
@@ -45,10 +47,16 @@ public class VentaVisual extends JFrame {
     private JTable tabla;
 
     private JSpinner stock1;
-
+   // SpinnerNumberModel sModel;
+    private    SpinnerNumberModel stock2;
     public Venta getVenta() {
         return venta;
     }
+
+    public Compra getPra() {
+        return pra;
+    }
+    
 
     public JButton getAgregar2() {
         return agregar2;
@@ -142,8 +150,28 @@ public class VentaVisual extends JFrame {
     public Productos getTo() {
         return to;
     }
+    /*
+    public SpinnerNumberModel getsModel() {
+        return sModel;
+    }
 
+    public void setsModel(SpinnerNumberModel sModel) {
+        this.sModel = sModel;
+    }
+   */
+
+    public SpinnerNumberModel getStock2() {
+        return stock2;
+    }
+
+    public void setStock2(SpinnerNumberModel stock2) {
+        this.stock2 = stock2;
+    }
+    
+    
+    
     public void initGUI2() {
+       pra= new Compra();
         pDatos2 = new JPanel(new GridLayout(7, 2));
         pb2 = new JPanel(new GridLayout(1, 1));
         cliente1 = new JLabel("Abrir a Registro de Clientes :");
@@ -165,13 +193,106 @@ public class VentaVisual extends JFrame {
         precio1 = new JTextField(12);
 
         stock = new JLabel("Stock");
-        SpinnerNumberModel sModel = new SpinnerNumberModel(0, 0, 30, 1);
-        stock1 = new JSpinner(sModel);
+        
+       // sModel = new SpinnerNumberModel(0, 0, 30, 1);
+      
         tipo = new JLabel("Tipo");
         tipo1 = new JTextField(12);
 
         combo1 = new JComboBox();
-        combo1.setModel(new DefaultComboBoxModel<>(getVenta().getProductos()));
+        combo1.setModel(new DefaultComboBoxModel<>(pra.getProductos()));
+          int selection = getCombo1().getSelectedIndex();
+        switch (selection) {
+
+            case 0:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(0).getCantidad()), 1);
+                }
+                break;
+            case 1:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(1).getCantidad()), 1);
+                }
+                break;
+            case 2:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(2).getCantidad()), 1);
+                }
+                break;
+            case 3:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(3).getCantidad()), 1);
+                }
+                break;
+            case 4:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(4).getCantidad()), 1);
+                }
+                break;
+            case 5:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(5).getCantidad()), 1);
+                }
+                break;
+            case 6:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(6).getCantidad()), 1);
+                }
+                break;
+            case 7:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(7).getCantidad()), 1);
+                }
+                break;
+            case 8:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(8).getCantidad()), 1);
+                }
+                break;
+            case 9:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(9).getCantidad()), 1);
+                }
+                break;
+            case 10:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(10).getCantidad()), 1);
+                }
+                break;
+            case 11:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(11).getCantidad()), 1);
+                }
+                break;
+            case 12:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(12).getCantidad()), 1);
+                }
+                break;
+
+            case 13:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(13).getCantidad()), 1);
+                }
+                break;
+            case 14:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(14).getCantidad()), 1);
+                }
+                break;
+            case 15:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(15).getCantidad()), 1);
+                }
+                break;
+            case 16:
+                for (int i = 0; i < to.RecuperarCantidades().size(); i++) {
+                    stock2 = new SpinnerNumberModel(0, 0, (to.RecuperarCantidades().get(16).getCantidad()), 1);
+                }
+                  break;
+            default:
+        }
+          stock1 = new JSpinner(stock2);
         pDatos2.add(codigo);
         pDatos2.add(codigo1);
         pDatos2.add(nombre);

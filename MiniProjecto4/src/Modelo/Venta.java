@@ -34,6 +34,7 @@ public class Venta {
     private Cliente cliente;
     private Proveedor proveedor;
     private Productos producto;
+    private Compra compra;
     private String productos[];
     private double precios[];
 
@@ -58,10 +59,17 @@ public class Venta {
     public Venta() {
 
     }
-
+   
     public Productos getProducto() {
         return producto;
     }
+   
+
+    public Compra getCompra() {
+        return compra;
+    }
+    
+    
     
     
      public double[] getPrecios() {
@@ -75,16 +83,20 @@ public class Venta {
                 
         return precios;
     }
+   
+
      
+    
       public String[] getProductos() {
-        producto = new Productos();
-        String productos[] = new String[producto.RecuperarNombreProductos().size()];
-        for (int i = 0; i < producto.RecuperarNombreProductos().size(); i++) {
-            productos[i] = getProducto().RecuperarNombreProductos().get(i).getNombre();
+        compra = new Compra();
+        String productos[] = new String[compra.RecuperarNombreProductos().size()];
+        for (int i = 0; i < compra.RecuperarNombreProductos().size(); i++) {
+            productos[i] = getCompra().RecuperarNombreProductos().get(i).getTipo();
         }
 
         return productos;
     }
+   
     
     
 
@@ -102,7 +114,6 @@ public class Venta {
         
         Venta cli = new Venta(codigo, nombre, precioi, stock1, tipo, venta,  cliente);
         enta.add(cli);
-         ///(int i = 0; i < enta.size(); i++)
         for (int i = 0; i < enta.size(); i++) {
             venta.getModelo().addRow(new Object[]{
                 enta.get(i).getCodigo(),

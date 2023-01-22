@@ -52,7 +52,7 @@ public class Productos {
         String nombre = ducto.getNombreuno().getText();
         double precio = Double.parseDouble(ducto.getPrecioouno().getText());
         int cantidad = Integer.parseInt(ducto.getCantidaduno().getText());
-        ducto.getPrecioouno().setText(String.valueOf((precio * cantidad)));
+        //ducto.getPrecioouno().setText(String.valueOf((precio * cantidad)));
         String precioi = ducto.getPrecioouno().getText();
         ArrayList<Productos> producto = new ArrayList<Productos>();
         Productos cli = new Productos(nombre, precioi, cantidad, ducto);
@@ -310,6 +310,14 @@ public class Productos {
           
           
           return  precios;
+      }
+      public ArrayList<Productos>RecuperarCantidades(){
+            ArrayList<Productos> cantidades = new ArrayList<Productos>();
+           cantidades= RecuperarProductos();
+            for (int i = 0; i < cantidades.size(); i++) {
+              cantidades.get(i).getCantidad();
+          }
+      return cantidades;
       }
 
     public boolean vendido(int numero) {
