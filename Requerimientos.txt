@@ -1,0 +1,18 @@
+A.Posibles Clases:
+
+1. Productos: gestionar la información de Productos.
+2. Clientes:  gestionar la información de Clientes
+3. Proveedores: gestionar la información de Proveedores
+4. VentasCompras:  efectua venta de productos a los clientes y compra de productos a los proveedores.
+
+B.Crud(Create, Read, Update, Delete) de:
+  Clientes.
+  Productos.
+  Proveedores.
+
+C.Alamacenamiento:
+La aplicación deberá almacenar información de forma persistente, utilizando archivos de texto
+o binarios.
+
+
+D. La aplicación deberá tener una interfaz gráfica de usuario que permita gestionar todas su funciones.
